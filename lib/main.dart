@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'config/DI/configure_dependencies.dart';
+import 'package:template/config/enviroment/enviroment_config.dart';
+import 'package:template/core/constants/api_path.dart';
 import 'config/routes/app_router.dart';
 import 'config/theme/app_size_config.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'config/theme/app_themes.dart';
 import 'core/services/translate_service.dart';
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await configureDependencies();
-  runApp(const ProviderScope(child: MyApp()));
-}
+// Future<void> main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   await configureDependencies();
+//   runApp(const ProviderScope(child: MyApp()));
+// }
 
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});
@@ -60,8 +61,11 @@ class _RootPageState extends State<RootPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+            Text(
+              AppEnvironment.envName.name,
+            ),
+            Text(
+              ApiPath.baseUrl,
             ),
             Text(
               '$_counter',

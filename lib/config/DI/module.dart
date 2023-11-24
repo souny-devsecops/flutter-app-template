@@ -1,8 +1,8 @@
 import 'package:injectable/injectable.dart';
 import 'package:dio/dio.dart';
 
-import '../core/middleware/interceptors.dart';
-import 'database/app_database.dart';
+import '../../core/middleware/interceptors.dart';
+import '../database/app_database.dart';
 
 @module
 abstract class AppModule {

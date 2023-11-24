@@ -15,7 +15,7 @@ import 'package:injectable/injectable.dart' as _i2;
 import '../../core/middleware/interceptors.dart' as _i4;
 import '../../core/services/local_database_service.dart' as _i7;
 import '../database/app_database.dart' as _i3;
-import '../module.dart' as _i8;
+import 'module.dart' as _i8;
 import '../routes/controller/go_router_notifier.dart' as _i6;
 
 extension GetItInjectableX on _i1.GetIt {

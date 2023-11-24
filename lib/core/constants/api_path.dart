@@ -1,5 +1,7 @@
+import '../../config/enviroment/enviroment_config.dart';
+
 class ApiPath {
   //base url
-  static const String baseUrl = "https://jsonplaceholder.typicode.com";
+  static String baseUrl = AppEnvironment.apiUrl;
   //api path
 }

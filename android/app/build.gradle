@@ -26,6 +26,24 @@ android {
     namespace "com.example.template"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
+    flavorDimensions "default"
+    productFlavors{
+       dev{
+           flavorDimensions "default"
+           resValue "string", "app_name", "DEV-Template"
+           applicationId "com.example.template.dev"
+       }
+       uat{
+           flavorDimensions "default"
+           resValue "string", "app_name", "UAT-Template"
+           applicationId "com.example.template.uat"
+       }
+       prd {
+           flavorDimensions "default"
+           resValue "string", "app_name", "Template"
+           applicationId "com.example.template"
+       }
+   }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
