@@ -23,25 +23,25 @@ if (flutterVersionName == null) {
 }
 
 android {
-    namespace "com.example.template"
+    namespace "com.ithq.hello"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
     flavorDimensions "default"
     productFlavors{
        dev{
            flavorDimensions "default"
-           resValue "string", "app_name", "DEV-Template"
-           applicationId "com.example.template.dev"
+           resValue "string", "app_name", "DEV-Hello"
+           applicationId "com.ithq.hello.dev"
        }
        uat{
            flavorDimensions "default"
-           resValue "string", "app_name", "UAT-Template"
-           applicationId "com.example.template.uat"
+           resValue "string", "app_name", "UAT-Hello"
+           applicationId "com.ithq.hello.uat"
        }
        prd {
            flavorDimensions "default"
-           resValue "string", "app_name", "Template"
-           applicationId "com.example.template"
+           resValue "string", "app_name", "Hello"
+           applicationId "com.ithq.hello"
        }
    }
 
@@ -60,7 +60,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.example.template"
+        applicationId "com.ithq.hello"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion flutter.minSdkVersion
