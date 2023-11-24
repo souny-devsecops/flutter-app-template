@@ -21,8 +21,8 @@ echo "RUN: rm -Rf pubspec.lock"
 flutter pub get
 echo "RUN: flutter pub get"
 # shellcheck disable=SC2164
-cd iOS
-echo "RUN: cd iOS"
-arch -x86_64 pod install --repo-update
-echo "RUN: arch -x86_64 pod install --repo-update"
-echo "That's it, enjoy ;)"
+# cd iOS
+# echo "RUN: cd iOS"
+# arch -x86_64 pod install --repo-update
+# echo "RUN: arch -x86_64 pod install --repo-update"
+# echo "That's it, enjoy ;)"
