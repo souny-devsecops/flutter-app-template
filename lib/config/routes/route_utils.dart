@@ -1,10 +1,12 @@
-enum PAGES { root }
+enum PAGES { root, demo }
 
 extension AppPageExtension on PAGES {
   String get screenPath {
     switch (this) {
       case PAGES.root:
         return "/";
+      case PAGES.demo:
+        return "/demo";
       default:
         return "/";
     }
@@ -14,6 +16,8 @@ extension AppPageExtension on PAGES {
     switch (this) {
       case PAGES.root:
         return "ROOT";
+      case PAGES.demo:
+        return "DEMO";
       default:
         return "ROOT";
     }

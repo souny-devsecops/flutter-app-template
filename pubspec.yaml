@@ -16,7 +16,7 @@ dependencies:
   # Database
   floor: ^1.4.2
   # Make request to api
-  retrofit: ^4.0.1
+  retrofit: ^4.0.3
   # cached network image
   cached_network_image: ^3.2.3
   # injection

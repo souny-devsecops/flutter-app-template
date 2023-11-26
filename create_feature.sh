@@ -11,6 +11,11 @@ if [[ ! "$1" =~ ^[a-z]+$ ]]; then
   exit 1
 fi
 
+# Check if the feature directory already exists
+if [ -d "lib/feature/$1" ]; then
+  echo "Error: Feature <$1> directory already exists."
+  exit 1
+fi
 
 # Capitalize the first letter of the feature name
 featureName=$(echo "$1" | awk '{print toupper(substr($0, 1, 1)) tolower(substr($0, 2))}')
@@ -43,8 +48,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../application/$1_notifier.dart';
 
-class ${featureName}Page extends ConsumerWidget {
-  const ${featureName}Page({super.key});
+class ${featureName}MainPage extends ConsumerWidget {
+  const ${featureName}MainPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -106,9 +111,17 @@ cat >> lib/feature/$1/data/repositories/$1_repository_impl.dart <<END
 
 import 'package:injectable/injectable.dart';
 import '../../domain/repositories/$1_repository.dart';
+import '../datasources/local/DAO/$1_dao.dart';
+import '../datasources/remote/$1_api_service.dart';
 
 @LazySingleton(as: ${featureName}Repository)
 class ${featureName}RepositoryImpl implements ${featureName}Repository {
+  final ${featureName}ApiService _$1ApiService;
+  final ${featureName}LocalService _$1LocalService;
+    ${featureName}RepositoryImpl(
+    this._$1ApiService,
+    this._$1LocalService,
+  );
 
 }
 END
@@ -117,12 +130,11 @@ END
 cat >> lib/feature/$1/data/datasources/remote/$1_api_service.dart <<END
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
-import '../../../../../core/constants/api_path.dart';
 import 'package:dio/dio.dart';
 part '$1_api_service.g.dart';
 
 @lazySingleton
-@RestApi(baseUrl: ApiPath.baseUrl)
+@RestApi()
 abstract class ${featureName}ApiService {
   @factoryMethod
   factory ${featureName}ApiService(Dio dio) = _${featureName}ApiService;
@@ -132,12 +144,19 @@ END
 
 
 cat >> lib/feature/$1/data/datasources/local/DAO/$1_dao.dart <<END
-
+import 'package:injectable/injectable.dart';
+import '../../../../../../core/services/local_database_service.dart';
+@LazySingleton()
+class ${featureName}LocalService {
+  final LocalDatabaseService _localDatabaseService;
+  ${featureName}LocalService(this._localDatabaseService);
+}
 END
 
 
 
 #  generate DI
+# flutter pub run build_runner build --delete-conflicting-outputs
 flutter pub run build_runner build
 
 echo "Clean Architecture folder structure created successfully!"

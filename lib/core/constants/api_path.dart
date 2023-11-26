@@ -1,7 +1,6 @@
-import '../../config/enviroment/enviroment_config.dart';
+import 'package:template/config/enviroment/enviroment_config.dart';
 
 class ApiPath {
-  //base url
   static String baseUrl = AppEnvironment.apiUrl;
-  //api path
+  static const String todos = "/todos";
 }

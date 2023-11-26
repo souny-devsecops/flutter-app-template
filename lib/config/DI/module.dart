@@ -1,5 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:dio/dio.dart';
+import 'package:template/core/constants/api_path.dart';
 
 import '../../core/middleware/interceptors.dart';
 import '../database/app_database.dart';
@@ -12,7 +13,7 @@ abstract class AppModule {
 
   @lazySingleton
   Dio dio(@Named('appInterceptors') AppInterceptors appInterceptors) {
-    final dio = Dio();
+    final dio = Dio(BaseOptions(baseUrl: ApiPath.baseUrl));
     dio.interceptors.add(appInterceptors);
     dio.interceptors.add(dioLogger());
     dio.interceptors.add(

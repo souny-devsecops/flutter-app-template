@@ -14,9 +14,16 @@ import 'package:injectable/injectable.dart' as _i2;
 
 import '../../core/middleware/interceptors.dart' as _i4;
 import '../../core/services/local_database_service.dart' as _i7;
+import '../../feature/demo/application/demo_notifier.dart' as _i13;
+import '../../feature/demo/data/datasources/local/DAO/demo_dao.dart' as _i9;
+import '../../feature/demo/data/datasources/remote/demo_api_service.dart'
+    as _i8;
+import '../../feature/demo/data/repositories/demo_repository_impl.dart' as _i11;
+import '../../feature/demo/domain/repositories/demo_repository.dart' as _i10;
+import '../../feature/demo/domain/usecases/fetch_user_usecase.dart' as _i12;
 import '../database/app_database.dart' as _i3;
-import 'module.dart' as _i8;
 import '../routes/controller/go_router_notifier.dart' as _i6;
+import 'module.dart' as _i14;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -43,8 +50,20 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i6.GoRouterNotifier>(() => _i6.GoRouterNotifier());
     gh.lazySingleton<_i7.LocalDatabaseService>(
         () => _i7.LocalDatabaseServiceImp(gh<_i3.AppDatabase>()));
+    gh.lazySingleton<_i8.DemoApiService>(
+        () => _i8.DemoApiService(gh<_i5.Dio>()));
+    gh.lazySingleton<_i9.DemoLocalService>(
+        () => _i9.DemoLocalService(gh<_i7.LocalDatabaseService>()));
+    gh.lazySingleton<_i10.DemoRepository>(() => _i11.DemoRepositoryImpl(
+          gh<_i8.DemoApiService>(),
+          gh<_i9.DemoLocalService>(),
+        ));
+    gh.factory<_i12.FetchUserUseCase>(
+        () => _i12.FetchUserUseCase(gh<_i10.DemoRepository>()));
+    gh.factory<_i13.DemoNotifier>(
+        () => _i13.DemoNotifier(gh<_i12.FetchUserUseCase>()));
     return this;
   }
 }
 
-class _$AppModule extends _i8.AppModule {}
+class _$AppModule extends _i14.AppModule {}
