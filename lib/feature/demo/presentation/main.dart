@@ -36,6 +36,13 @@ class DemoPage extends ConsumerWidget {
               },
               child: Text("Get User", style: AppTextStyles.titleWhite),
             ),
+            MaterialButton(
+              color: AppColors.colorSuccess,
+              onPressed: () {
+                demoAction.postDemo();
+              },
+              child: Text("Post API Demo", style: AppTextStyles.titleWhite),
+            ),
             Expanded(
                 child: ListView.builder(
               itemCount: demoState.users!.length,
